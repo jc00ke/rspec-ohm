@@ -1,7 +1,11 @@
 require "ohm"
 
 begin
-  Ohm.redis = Redic.new("redis://127.0.0.1:6380")
+  Ohm.redis = if ENV.key?("TRAVIS")
+                Redic.new
+              else
+                Redic.new("redis://127.0.0.1:6380")
+              end
   Ohm.redis.call("INFO")
 rescue Errno::ECONNREFUSED
   puts "We run redis on port 6380"

@@ -6,4 +6,4 @@ rvm:
   - 2.2
   - rbx-2
 services:
-  - redis-server --port 6380
+  - redis-server
