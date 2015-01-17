@@ -1,8 +1,24 @@
+require "ohm"
+
+begin
+  Ohm.redis = Redic.new("redis://127.0.0.1:6380")
+  Ohm.redis.call("INFO")
+rescue Errno::ECONNREFUSED
+  puts "We run redis on port 6380"
+  puts "so we don't overwrite any of your dev data"
+  puts "Please fire it up: `redis-server --port 6380`"
+  exit(1)
+end
+
 require "rspec/ohm"
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   config.include RSpec::Ohm
+
+  config.before(:each) do
+    Ohm.redis.call("FLUSHDB")
+  end
 
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
