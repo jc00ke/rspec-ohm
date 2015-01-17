@@ -22,7 +22,49 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Wire up:
+
+```ruby
+RSpec.configure do |config|
+  config.include RSpec::Ohm, type: :model
+end
+```
+
+## Matchers
+
+```ruby
+class User < Ohm::Model
+
+end
+
+class Widget < Ohm::Model
+  attribute   :name
+  index       :name
+  unique      :name
+
+  set :users, :User
+end
+
+RSpec.describe Widget do
+  it do
+    expect(subject).to have_attribute(:name)
+    expect(subject).to have_attribute(:name).with_index
+  end
+
+  it do
+    expect(subject).to have_set_of(:users).with_index
+    expect(subject).to have_set_of(:users).with_class(User)
+  end
+
+  it do
+    expect(subject).to have_unique(:name)
+  end
+end
+```
+
+## TODO
+
+1. More matchers!
 
 ## Contributing
 
