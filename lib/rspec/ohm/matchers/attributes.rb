@@ -1,7 +1,5 @@
 module RSpec
   module Ohm
-    extend RSpec::Matchers::DSL
-
     define :have_attribute do |expected|
       match do |actual|
         included = actual.class.attributes.include?(expected)
