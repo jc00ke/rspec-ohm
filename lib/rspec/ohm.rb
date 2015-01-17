@@ -9,6 +9,7 @@ require "rspec/ohm/version"
 
 require "rspec/ohm/matchers/attributes"
 require "rspec/ohm/matchers/set"
+require "rspec/ohm/matchers/unique"
 
 module Rspec
   module Ohm
