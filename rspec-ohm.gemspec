@@ -22,4 +22,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "rake", "~> 10.0"
   spec.add_dependency "rspec", "~> 3.1"
   spec.add_dependency "ohm", "~> 2.0"
+
+  spec.add_development_dependency "pry", "~> 0.10"
 end
